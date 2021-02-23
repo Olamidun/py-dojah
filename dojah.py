@@ -1,4 +1,8 @@
+import os
 import requests
+from dotenv import load_dotenv
+
+load_dotenv()
 
 class PyDojah:
 
@@ -23,7 +27,6 @@ class PyDojah:
 
         endpoint = f"{self.base_endpoint}/api/v1/balance"
 
-        # data = {'amount': amount, "destination": destination}
 
         response = requests.get(endpoint, headers=headers)
         return response.json()
@@ -52,8 +55,10 @@ class PyDojah:
         return response.json()
         
 
+app_id = os.getenv('APP_ID')
+secret_key = os.getenv('TEST_SECRET_KEY')
 
-dojah = PyDojah('5fc144c4318b66003e7644c2', 'test_sk_4NJutv5R4FpQFiyC0SPAPcezX', sandbox=True)
+dojah = PyDojah(app_id, secret_key, sandbox=True)
 
 result = dojah.crypto_wallet_details('26e5233e-90b5-446d-9a77-aff73ccb7f81') 
 print(result)
