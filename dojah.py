@@ -57,10 +57,11 @@ class PyDojah:
 
 app_id = os.getenv('APP_ID')
 secret_key = os.getenv('TEST_SECRET_KEY')
+wallet_id = os.getenv('TEST_WALLET_ADDRESS')
 
 dojah = PyDojah(app_id, secret_key, sandbox=True)
 
-result = dojah.crypto_wallet_details('26e5233e-90b5-446d-9a77-aff73ccb7f81') 
+result = dojah.crypto_wallet_details(wallet_id) 
 print(result)
 
 
