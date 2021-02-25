@@ -19,11 +19,13 @@ class PyDojah:
 
         return headers
 
+    # Private method to send a POST request     
     def _post_data(self, url, data):
         headers = self._authentication_headers()
         response = requests.post(url, headers=headers, data=data)
         return response.json() 
 
+    # Private method to send a GET request
     def _get_data(self, url, params=None):
         headers = self._authentication_headers()
 
