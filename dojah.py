@@ -1,75 +1,80 @@
 import os
 import requests
 from dotenv import load_dotenv
+from endpoints import Endpoints
 
 load_dotenv()
 
 class PyDojah:
 
-    def __init__(self, app_id, secret_key, sandbox=True):
+    def __init__(self, app_id, secret_key):
         self.app_id = app_id
         self.secret_key = secret_key
 
-        self.base_endpoint = 'https://sandbox.dojah.io'
+        self.endpoint = Endpoints()
 
-        if not sandbox:
-            self.base_endpoint = 'https://api.dojah.io'
-
-
+    # Private method to create headers dictionary
     def _authentication_headers(self):
         headers = {'Authorization': self.secret_key, 'AppId': self.app_id}
 
         return headers
 
+    def _post_data(self, url, data):
+        headers = self._authentication_headers()
+        response = requests.post(url, headers=headers, data=data)
+        return response.json() 
 
+    def _get_data(self, url, params=None):
+        headers = self._authentication_headers()
+
+        response = requests.get(url, headers=headers, params=params)
+        return response.json()
+
+
+    # Endpoint to get Dojah wallet balance
     def get_balance(self):
-        headers = self._authentication_headers()
+        return self._get_data(self.endpoint.wallet_balance_endpoint())
 
-        endpoint = f"{self.base_endpoint}/api/v1/balance"
-
-
-        response = requests.get(endpoint, headers=headers)
-        return response.json()
-
-    
+    # Endpoint to get crypto wallet details
     def crypto_wallet_details(self, wallet_id):
-        headers = self._authentication_headers()
+        
+        payload = {
+            "wallet_id": wallet_id
+        }
+        return self._get_data(self.endpoint.get_crypto_wallet_endpoint(), params=payload)
+        
+    # Endpoint to create crypto wallet
+    def create_crypto_wallet(self, wallet_type):
 
-        endpoint = f"{self.base_endpoint}/api/v1/wallet?wallet_id={wallet_id}"
-        print(endpoint)
+        data = {"wallet_type": wallet_type}
 
-        response = requests.get(endpoint, headers=headers)
-        return response.json()
-
+        return self._post_data(self.endpoint.crypto_wallet_endpoint(), data)
         
 
+    # Endpoint to buy Airtime
+    def airtime(self, amount, destination):
+        
+        data = {
+            "amount": amount,
+            "destination": destination
+        }
 
-    def create_crypto_wallet(self, wallet_type):
-        headers = self._authentication_headers()
+        return self._post_data(self.endpoint.airtime_endpoint(), data)
 
-        endpoint = f"{self.base_endpoint}/api/v1/wallet/create"
+    def data(self, plan, destination):
 
-        data = {'wallet_type': wallet_type}
+        data = {
+            "plan": plan,
+            "destination": destination
+        }
 
-        response = requests.post(endpoint, headers=headers, data=data)
-        return response.json()
+        return self._post_data(self.endpoint.airtime_endpoint(), data)
         
 
 app_id = os.getenv('APP_ID')
 secret_key = os.getenv('TEST_SECRET_KEY')
 wallet_id = os.getenv('TEST_WALLET_ADDRESS')
 
-dojah = PyDojah(app_id, secret_key, sandbox=True)
-
+dojah = PyDojah(app_id, secret_key)
 result = dojah.crypto_wallet_details(wallet_id) 
 print(result)
-
-
-
-
-
-# def _get(self, endpoint_extension):
-#         self.endpoint = f"{self.base_endpoint}{endpoint_extension}"
-#         headers = {'Authorization': self.secret_key, 'AppId': self.app_id}
-#         response = requests.get(self.endpoint, headers=headers)
-#         return response.json()
