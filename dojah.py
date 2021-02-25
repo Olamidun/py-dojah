@@ -7,11 +7,11 @@ load_dotenv()
 
 class PyDojah:
 
-    def __init__(self, app_id, secret_key):
+    def __init__(self, app_id, secret_key, sandbox=False):
         self.app_id = app_id
         self.secret_key = secret_key
-
-        self.endpoint = Endpoints()
+        self.sandbox = sandbox
+        self.endpoint = Endpoints(sandbox=self.sandbox)
 
     # Private method to create headers dictionary
     def _authentication_headers(self):
@@ -77,6 +77,8 @@ app_id = os.getenv('APP_ID')
 secret_key = os.getenv('TEST_SECRET_KEY')
 wallet_id = os.getenv('TEST_WALLET_ADDRESS')
 
-dojah = PyDojah(app_id, secret_key)
+dojah = PyDojah(app_id, secret_key, sandbox=False)
+# print(dojah.endpoint.sandbox)
+print(dojah.sandbox)
 result = dojah.crypto_wallet_details(wallet_id) 
 print(result)

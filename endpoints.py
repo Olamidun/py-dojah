@@ -1,9 +1,8 @@
 class Endpoints:
 
-    def __init__(self, sandbox=True):
+    def __init__(self, sandbox=False):
         self.base_endpoint = 'https://sandbox.dojah.io'
         self.sandbox = sandbox
-
         if not self.sandbox:
             self.base_endpoint = 'https://api.dojah.io'
 
