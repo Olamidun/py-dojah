@@ -1,4 +1,4 @@
-class Endpoints:
+class EndPoints:
 
     def __init__(self, sandbox=False):
         self.base_endpoint = 'https://sandbox.dojah.io'
@@ -37,8 +37,6 @@ class Endpoints:
         self.transaction_details = '/api/v1/wallet/transaction' # GET --- takes in transaction id
  
 
-
-
     def wallet_balance_endpoint(self):
         return f"{self.base_endpoint}{self.wallet_balance}"
 
@@ -72,7 +70,7 @@ class Endpoints:
     def buy_data_endpoint(self):
         return f"{self.base_endpoint}{self.buy_data}"
     
-    def data_plans_endpoint(self):
+    def data_plans_endpoint(self): 
         return f"{self.base_endpoint}{self.data_plans}"
 
     def airtime_endpoint(self):
