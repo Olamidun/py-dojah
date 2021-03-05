@@ -8,11 +8,6 @@ class EndPoints:
 
         self.wallet_balance = '/api/v1/balance' # ----GET
 
-        self.account_information = '/api/v1/financial/account_information' # -----GET
-
-        self.bvn_info = '/api/v1/financial/bvn_information' #needs account_id ----- GET
-        self.full_bvn_info = '/financial/bvn_information' #needs account_id -----GET
-
         self.messaging = '/api/v1/messaging/sms' #needs sender id(default is dojah), priority, channel(whether whatsapp or sms), message, destination(number you are sending to)----- POST
 
         self.request_sender_id = '/api/v1/messaging/sender_id' # needs sender_id -----POST
@@ -39,15 +34,6 @@ class EndPoints:
 
     def wallet_balance_endpoint(self):
         return f"{self.base_endpoint}{self.wallet_balance}"
-
-    def account_information_endpoint(self):
-        return f"{self.base_endpoint}{self.account_information}"
-
-    def bvn_info_endpoint(self):
-        return f"{self.base_endpoint}{self.bvn_info}"
-
-    def full_bvn_info_endpoint(self):
-        return f"{self.base_endpoint}{self.full_bvn_info}"
 
     def messaging_endpoint(self):
         return f"{self.base_endpoint}{self.messaging}"

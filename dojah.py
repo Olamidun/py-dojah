@@ -58,7 +58,7 @@ class PyDojah:
         return self.__post_data(self.endpoint.crypto_wallet_endpoint(), data)
 
 
-    # method for crypto transaction details(Yet to be tested)
+    # method for crypto transaction details
     def crypto_transaction_detail(self, transaction_id):
         payload = {
             "transaction_id": transaction_id
@@ -75,7 +75,7 @@ class PyDojah:
         }
         return self.__post_data(self.endpoint.send_crypto_endpoint(), data)
 
-    
+
     '''Data and Airtime functions'''
     # method to buy Airtime
     def airtime(self, amount, destination):        
@@ -102,6 +102,8 @@ class PyDojah:
         return self.__get_data(self.endpoint.data_plans_endpoint())
 
 
+
+    '''OTP and Messaging'''
     # method for sending otp, the voice channel isn't working and sms is yet to be tested!
     def send_otp(self, sender_id, destination, channel, expiry=None, length=None):
         data = {
@@ -136,12 +138,12 @@ class PyDojah:
 
     
     # Method to confirm message status
-    # def get_message_status(self, message_id):
-    #     payload = {
-    #         "message_id": message_id
-    #     }
+    def get_message_status(self, message_id):
+        payload = {
+            "message_id": message_id
+        }
 
-    #     return self.__get_data(self.endpoint.message_status_endpoint(), payload)
+        return self.__get_data(self.endpoint.message_status_endpoint(), payload)
 
     
     # method to request for sender id
@@ -155,6 +157,7 @@ class PyDojah:
     # method for fetching the list of all your sender ID
     def get_sender_id(self):
         return self.__get_data(self.endpoint.fetch_sender_ids_endpoint())
+
 
 app_id = os.getenv('APP_ID')
 secret_key = os.getenv('PROD_SECRET_KEY')
