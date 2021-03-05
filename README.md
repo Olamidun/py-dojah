@@ -69,15 +69,19 @@ This method also takes in an argument which is the wallet_id, remember to replac
 You can also send crypto to another address of the same currency using the send_crypto method:
 
 ```
-result = class_object.send_crypto("sender wallet id",  amount(integer), "recipient wallet address")
+result = class_object.send_crypto("sender wallet id",  amount, "recipient wallet address")
+
+print(result)
 ```
-Remember to replace sender wallet id, amount and recipient wallet address with the right values.
+Remember to replace sender wallet id, amount which is an integer and recipient wallet address with the right values.
 
 
 To get the details of a crypto transaction you have made, you can call the crypto_transaction_detail method. It takes in the transaction id which can be gotten from the output of send_crypto method:
 
 ```
 result = class_object.crypto_transaction_detail("transaction_id")
+
+print(result)
 ```
 
 
