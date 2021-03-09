@@ -68,6 +68,8 @@ class PyDojah:
     
     # method for sending Crypto to another Address of the same currency(Tested)
     def send_crypto(self, sender_wallet_id, amount, recipient_address):
+        if amount < 0:
+            raise ValueError('Amount cannot be a negative value')
         data = {
             "sender_wallet_id": sender_wallet_id,
             "amount": amount,
@@ -78,7 +80,11 @@ class PyDojah:
 
     '''Data and Airtime functions'''
     # method to buy Airtime
-    def airtime(self, amount, destination):        
+    # To check for negative amount
+    def airtime(self, amount, destination):  
+        
+        if amount < 0:
+            raise ValueError('Amount cannot be a negative value')      
         data = {
             "amount": amount,
             "destination": destination
@@ -105,6 +111,7 @@ class PyDojah:
 
     '''OTP and Messaging'''
     # method for sending otp, the voice channel isn't working and sms is yet to be tested!
+    # TO DO: TRY TO BRING BACK THE PRIORITY OPTION
     def send_otp(self, sender_id, destination, channel, expiry=None, length=None):
         data = {
             "expiry": expiry,
@@ -163,8 +170,9 @@ app_id = os.getenv('APP_ID')
 secret_key = os.getenv('PROD_SECRET_KEY')
 wallet_id = os.getenv('TEST_WALLET_ADDRESS')
 dojah = PyDojah(app_id, secret_key, sandbox=False)
-# result = dojah.send_otp("Dojah", "08103087162", ["whatsapp", ])
+result = dojah.send_otp("Dojah", "08103087162", "voice")
 # result = dojah.check_otp("394607", "06a08f61-e11e-43ca-b4c3-00508961e39d")
 # result = dojah.send_sms_or_whatsapp("whatsapp", "Hey man", "08103087162", "Dojah")
-result = dojah.get_message_status("edce9bbd-4cb0-41c4-8771-abe5d57fcd7c")
+# result = dojah.get_message_status("edce9bbd-4cb0-41c4-8771-abe5d57fcd7c")
+result = dojah.airtime(150, "09051143455")
 print(result)

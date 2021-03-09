@@ -25,12 +25,11 @@ You have to initialize the class you just imported, and you can do that with:
 class_object = PyDojah(app_id, secret_key, sandbox=False)
 ```
 
-///To be given bullet points
-app_id is the ID of the app you created in your dojah dashboard.
+* app_id is the ID of the app you created in your dojah dashboard.
 
-secret_key is the secret_key given to you by dojah once you sign up
+* secret_key is the secret_key given to you by dojah once you sign up
 
-sandbox is to indicate which environment you are calling the endpoints from, default is False which means you are calling them in production, if you set it to true it means you are calling them in development.
+* sandbox is to indicate which environment you are calling the endpoints from, default is False which means you are calling them in production, if you set it to true it means you are calling them in development.
 
 NOTE: some endpoints only work in production environment, so if you want to test them, remember to change your sandbox value
 
@@ -80,5 +79,91 @@ To get the details of a crypto transaction you have made, you can call the crypt
 result = class_object.crypto_transaction_detail("transaction_id")
 ```
 
+## Airtime and Data Functions
+To buy airtime, make use of the airtime() method. The airtime method takes in amount - an integer, and destination - a string which is the number you want to recharge.
 
+```
+result = class_object.airtime(100, "08012345678")
+print(result)
 
+```
+
+To buy data, make use of the data() method. The data method takes in plan which is the bundle you want to subscribe to, and destination - a string which is the number you want to recharge.
+
+```
+result = class_object.data("data_plan", "destination")
+print(result)
+```
+Remember to replace "data_plan" with its value, same for destination.
+
+list of data plans can be gotten by calling the data_plan() method like this:
+
+```
+result = class_object.data_plan()
+print(result)
+```
+
+## OTP and Messaging
+You can also use this library to send messages and OTP. To send otp, you can call the send_otp() method like this:
+
+```
+result = class_object.send_otp("sender_id", "destination", channel, expiry=5, lenght=5)
+print(result)
+```
+
+* sender_id - a string is the sender id associated with your dojah account, you can request for one using request_for_sender_id(sender_id) method where sender_id is the what you'd like your sender_id to be, it could be your company name or any name you like. For example:
+
+```
+result = class_object.request_for_sender_id("Py-Dojah")
+print(result)
+```
+For the purose of development, you can use "Dojah" as the sender id
+
+Note that this will send DOJAH a mail about your request and could take them some time before they get back to you.
+You can also get all the sender id associated with your dojah account if you have more than one with get_sender_id() method like this:
+
+```
+result = class_object.get_sender_id()
+print(result)
+```
+* destination - a string is the number you want to send the OTP code to.
+* channel is a list containing where you want the OTP to be sent to; either or any of "whatsapp", "sms" can be used.
+* expiry is a key word argument for how long you want the OTP to be valid, it is optional, i.e if you don't include it as an argument, the default expiry is used which is 10 minutes.
+* length is also a key word argument that defines how many characters you want the OTP t0 have, it is also optional i.e if it is not included in the as an argument the default 6 characters will be used.
+
+To validate OTP, make use of the check_otp() method, like this:
+
+```
+result = class_object.check_otp(code, reference_id)
+print(result)
+```
+
+* code is the OTP code you want to validate
+* reference_id is the reference returned as a response when you called ```
+send_otp()
+```
+
+To send sms or whatsapp message, call ```
+send_sms_or_whatsapp()
+``` 
+like this:
+
+```
+result = class_object.send_sms_or_whatsapp(channel, message, destination, sender_id)
+print(result)
+```
+
+* channel is a string that indicates where you want message to be sent to; either or any of "whatsapp", "sms" can be used.
+* message - a string...the actual message you want to send.
+* destination - a string. The number you want the message to be sent to.
+* sender_id - a string is your sender id
+
+To get the status of your message i.e to know whether it has been sent or not, use ```get_message_status()
+```
+like this:
+
+```
+result = class_object.get_message_status(message_id)
+print(result)
+```
+message_id can be gotten from the response of send_sms_or_whatsapp()
