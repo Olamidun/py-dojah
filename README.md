@@ -162,12 +162,13 @@ print(result)
 * destination - a string. The number you want the message to be sent to.
 * sender_id - a string is your sender id
 
-To get the status of your message i.e to know whether it has been sent or not, use ```get_message_status()
+To get the status of your message i.e to know whether it has been sent or not, use 
+```
+get_message_status()
 ```
 like this:
 
-```
-result = class_object.get_message_status(message_id)
+```result = class_object.get_message_status(message_id)
 print(result)
 ```
 message_id can be gotten from the response of send_sms_or_whatsapp()
