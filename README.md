@@ -111,7 +111,7 @@ print(result)
 You can also use this library to send messages and OTP. To send otp, you can call the send_otp() method like this:
 
 ```
-result = class_object.send_otp("sender_id", "destination", channel, expiry=5, lenght=5)
+result = class_object.send_otp("sender_id", "destination", ["whatsapp", "sms", "voice"], priority=True expiry=5, lenght=5)
 print(result)
 ```
 
@@ -131,9 +131,11 @@ result = class_object.get_sender_id()
 print(result)
 ```
 * destination - a string is the number you want to send the OTP code to.
-* channel is a list containing where you want the OTP to be sent to; either or any of "whatsapp", "sms" can be used.
+* The list containing "whatsapp", "sms", and "voice" are the channels with which the destination number can receive the OTP. You can use either of the options, or any two you like or all the options. 
+Note that if you will be using whatsapp as a channel be sure to use whatsapp number as the destination.
+* Priority kwargs just tells dojah to treat the request as a priority. It is an optional argument, if you do not give it a boolean value, it defaults to True.
 * expiry is a key word argument for how long you want the OTP to be valid, it is optional, i.e if you don't include it as an argument, the default expiry is used which is 10 minutes.
-* length is also a key word argument that defines how many characters you want the OTP t0 have, it is also optional i.e if it is not included in the as an argument the default 6 characters will be used.
+* length is also a key word argument that defines how many characters you want the OTP to have, it is also optional i.e if it is not included in the as an argument the default 6 characters will be used.
 
 To validate OTP, make use of the check_otp() method, like this:
 
