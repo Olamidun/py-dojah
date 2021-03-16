@@ -77,6 +77,18 @@ class PyDojah:
         }
         return self.__post_data(self.endpoint.send_crypto_endpoint(), data)
 
+    
+    def send_crypto_to_your_wallet(self, amount, recipient_wallet_id, sender_wallet_id):
+
+        if amount < 0:
+            raise ValueError('Amount cannot be a negative value')
+        data = {
+            "amount": amount,
+            "recipient_wallet_id": recipient_wallet_id,
+            "sender_wallet_id": sender_wallet_id
+        }
+        return self.__post_data(self.endpoint.send_crypto_internal_endpoint(), data)
+
 
     '''Data and Airtime functions'''
     # method to buy Airtime
@@ -167,8 +179,10 @@ class PyDojah:
 
 
 app_id = os.getenv('APP_ID')
-secret_key = os.getenv('PROD_SECRET_KEY')
+secret_key = os.getenv('TEST_SECRET_KEY')
 wallet_id = os.getenv('TEST_WALLET_ADDRESS')
-dojah = PyDojah(app_id, secret_key, sandbox=False)
+dojah = PyDojah(app_id, secret_key, sandbox=True)
+
+result = dojah.send_crypto_to_your_wallet( 5, '5bfdc7a0-baab-4f80-906d-527ca01f4702', '62f46da5-93e4-4dc6-9631-ffb2b860c632')
 print(result)
 # print(bool('false'))

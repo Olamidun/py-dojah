@@ -74,6 +74,9 @@ print(result)
 ```
 Remember to replace sender wallet id, amount which is an integer and recipient wallet address with the right values.
 
+If you have more than one wallet of the same cryptocurrency, you can send crypto from one address to another using send_crypto_to_your_wallet() function.
+It takes in the amount - an integer that you want to send, recipient wallet id i.e the id of your other wallet and the sender wallet id i.e the id of your wallet from which you are sending from. Both recipient and sender wallet id are strings.
+
 
 To get the details of a crypto transaction you have made, you can call the crypto_transaction_detail method. It takes in the transaction id which can be gotten from the output of send_crypto method:
 

@@ -29,7 +29,12 @@ class EndPoints:
         self.get_crypto_wallet = '/api/v1/wallet' # ----- Query Parameter of wallet_id
 
         self.send_crypto = '/api/v1/wallet/send' # POST----- Takes in sender wallet id, amount, recipient crypto wallet address
+
+        self.internal_crypto = '/api/v1/wallet/send/internal'
+
         self.transaction_details = '/api/v1/wallet/transaction' # GET --- takes in transaction id
+
+    
  
 
     def wallet_balance_endpoint(self):
@@ -43,6 +48,9 @@ class EndPoints:
 
     def send_crypto_endpoint(self):
         return f"{self.base_endpoint}{self.send_crypto}"
+
+    def send_crypto_internal_endpoint(self):
+        return f"{self.base_endpoint}{self.internal_crypto}"
 
     def get_crypto_wallet_endpoint(self):
         return f"{self.base_endpoint}{self.get_crypto_wallet}"
