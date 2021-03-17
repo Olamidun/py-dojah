@@ -1,9 +1,6 @@
-import os
 import requests
-from dotenv import load_dotenv
-from endpoints import EndPoints
+from pydojah.endpoints import EndPoints
 
-load_dotenv()
 
 class PyDojah:
 
@@ -178,11 +175,4 @@ class PyDojah:
         return self.__get_data(self.endpoint.fetch_sender_ids_endpoint())
 
 
-app_id = os.getenv('APP_ID')
-secret_key = os.getenv('TEST_SECRET_KEY')
-wallet_id = os.getenv('TEST_WALLET_ADDRESS')
-dojah = PyDojah(app_id, secret_key, sandbox=True)
 
-result = dojah.send_crypto_to_your_wallet( 5, '5bfdc7a0-baab-4f80-906d-527ca01f4702', '62f46da5-93e4-4dc6-9631-ffb2b860c632')
-print(result)
-# print(bool('false'))
