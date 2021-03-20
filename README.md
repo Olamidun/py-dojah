@@ -16,7 +16,7 @@ pip install py-dojah
 To use this library, import it like this:
 
 ```
-from dojah import PyDojah
+from pydojah.dojah import PyDojah
 ```
 
 You have to initialize the class you just imported, and you can do that with:
