@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="py_dojah", # Replace with your own username
-    version="0.0.3",
+    version="1.0.0",
     author="Kolapo Olamidun",
     author_email="kolapoolamidun@gmail.com",
     description="An API wrapper for dojah.io API",

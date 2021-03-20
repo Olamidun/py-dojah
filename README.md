@@ -8,7 +8,7 @@ Dojah API allows you to make use of their various services like messaging servic
 The library has been uploaded on PYPI, you can install it from the command line by running:
 
 ```
-pip install py-dojah # yet to be uploaded
+pip install py-dojah
 ```
 
 ## Usage
@@ -114,7 +114,7 @@ print(result)
 You can also use this library to send messages and OTP. To send otp, you can call the send_otp() method like this:
 
 ```
-result = class_object.send_otp("sender_id", "destination", ["whatsapp", "sms", "voice"], priority=True expiry=5, lenght=5)
+result = class_object.send_otp("sender_id", "destination", ["whatsapp", "sms", "voice"], priority=True, expiry=5, length=5)
 print(result)
 ```
 
